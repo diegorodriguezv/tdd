@@ -27,26 +27,31 @@ class NewVisitorTest(unittest.TestCase):
         # He hits enter and the task is added
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
-
-        table = self.browser.find_element_by_id("id_list_table")
-        rows = table.find_elements_by_tag_name("tr")
-        self.assertTrue(
-            any(row.text == "1: play piano" for row in rows),
-            f"New to do item did not appear in table. Contents were: {table.text}",
-        )
+        self.check_for_row_in_table("1: play piano")
 
         # He enters "practice yoga"
-        self.fail("Finish the test!")
+        inputbox = self.browser.find_element_by_id("id_new_item")
+        inputbox.send_keys("practice yoga")
 
         # He hits enter and the task is added
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
 
         # The page shows both tasks
+        self.check_for_row_in_table("1: play piano")
+        self.check_for_row_in_table("2: practice yoga")
 
         # Ths site has generated a unique url and shows text explaining that
+        self.fail("Finish the test!")
 
         # He visits the url, both tasks are there
 
         # profit!
+
+    def check_for_row_in_table(self, row_text):
+        table = self.browser.find_element_by_id("id_list_table")
+        rows = table.find_elements_by_tag_name("tr")
+        self.assertIn(row_text, [row.text for row in rows])
 
     def tearDown(self):
         self.browser.quit()
