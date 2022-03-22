@@ -32,7 +32,7 @@ class NewVisitorTest(unittest.TestCase):
         rows = table.find_elements_by_tag_name("tr")
         self.assertTrue(
             any(row.text == "1: play piano" for row in rows),
-            "New to do item did not appear in table",
+            f"New to do item did not appear in table. Contents were: {table.text}",
         )
 
         # He enters "practice yoga"
