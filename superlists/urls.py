@@ -15,9 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from lists import views
-# from django.contrib import admin
 
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
-    url(r"^$", views.home_page, name="home")
+    url(r"^$", views.home_page, name="home"),
+    url(r'^lists/theone/$', views.view_list, name='view_list'),
 ]
