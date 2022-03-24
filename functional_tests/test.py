@@ -9,10 +9,7 @@ POLL_INTERVAL = 0.5
 
 
 class NewVisitorTest(LiveServerTestCase):
-    # TODO: Adjust model so that items are associated with different lists
-    # TODO: Add unique urls for each list
-    # TODO: Add a url for creating a new list via post
-    # TODO: Add urls for adding a new item to an existing list via post
+    # TODO: Refactor away some duplication in urls.py
     def setUp(self):
         self.browser = webdriver.Firefox()
 
