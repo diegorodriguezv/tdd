@@ -83,7 +83,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotEqual(list_url, list_url_2)
 
         # There is no sign of Diego's list
-        page_text = self.browser.find_elements_by_tag_name("body").text
+        page_text = self.browser.find_element_by_tag_name("body").text
         self.assertNotIn("play piano", page_text)
         self.assertIn("tdd", page_text)
 
