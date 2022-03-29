@@ -4,3 +4,4 @@ virtualenv
 *.swp
 __pycache__
 *.pyc
+/static
