@@ -22,6 +22,13 @@ eg, on Ubuntu 20.04:
 * see gunicorn-systemd.template.service
 * replace DOMAIN with, e.g., staging.my-domain.com
 
+## config_nginx_gunicorn.sh <sitename>
+ this bash script will:
+
+* copy the templates above to the correct locations
+* replace DOMAIN with the argument provided
+* start the services and run them at boot
+
 ## Folder structure:
 
 Assume we have a user account at /home/username
