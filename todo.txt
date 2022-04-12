@@ -1,3 +1,4 @@
 Remove hard coded urls from views.py
 Remove hard coded urls from forms in list.html and home.html
+Remove duplication of validation logic in views
 
