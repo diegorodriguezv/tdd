@@ -1,0 +1,1 @@
+Remove hard coded urls from views.py
