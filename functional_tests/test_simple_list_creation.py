@@ -15,7 +15,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn("To-Do", header_text)
 
         # He wants to add a task
-        inputbox = self.browser.find_element_by_id("id_new_item")
+        inputbox = self.get_item_input_box()
         self.assertEqual(inputbox.get_attribute("placeholder"), "Enter a to-do item")
 
         # He adds "play piano"
@@ -26,7 +26,7 @@ class NewVisitorTest(FunctionalTest):
         self.wait_for_row_in_table("1: play piano")
 
         # He enters "practice yoga"
-        inputbox = self.browser.find_element_by_id("id_new_item")
+        inputbox = self.get_item_input_box()
         inputbox.send_keys("practice yoga")
 
         # He hits enter and the task is added
@@ -41,7 +41,7 @@ class NewVisitorTest(FunctionalTest):
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Diego starts a new to-do list
         self.browser.get(self.live_server_url)
-        inputbox = self.browser.find_element_by_id("id_new_item")
+        inputbox = self.get_item_input_box()
         inputbox.send_keys("play piano")
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_table("1: play piano")
@@ -61,7 +61,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertNotIn("practice yoga", page_text)
 
         # Fernando starts a new list by entering a new item.
-        inputbox = self.browser.find_element_by_id("id_new_item")
+        inputbox = self.get_item_input_box()
         inputbox.send_keys("tdd")
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_table("1: tdd")
