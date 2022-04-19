@@ -17,7 +17,7 @@ class HomePageTest(TestCase):
 
     def test_home_page_uses_item_form(self):
         response = self.client.get("/")
-        self.assertIs(response.context["form"], ItemForm)
+        self.assertIsInstance(response.context["form"], ItemForm)
 
 
 class NewListTest(TestCase):
