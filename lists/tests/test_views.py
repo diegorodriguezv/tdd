@@ -102,7 +102,7 @@ class ListViewTest(TestCase):
         response = self.client.post(f"/lists/{list_.id}/", data={"text": ""})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "list.html")
-        expected_error = escape("You can't have an empty list item")
+        expected_error = escape(EMPTY_ITEM_ERROR)
         self.assertContains(response, expected_error)
 
     def post_invalid_input(self):
