@@ -49,7 +49,7 @@ class LoginTest(FunctionalTest):
         self.browser.find_element_by_link_text("Log out").click()
 
         # She is logged out
-        self.wait_to_be_logged_out(email=TEST_EMAIL)
+        self.wait_to_be_logged_out(email=test_email)
 
     def wait_for_email(self, test_email, subject):
         if not self.staging_server:
@@ -65,16 +65,22 @@ class LoginTest(FunctionalTest):
             inbox.pass_(os.environ["GMAIL_PASSWORD"])
             while time.time() - start < 60:
                 # get 10 newest messages
-                count, _ = inbox.stat()
+                count, size = inbox.stat()
+                print(test_email, count)
                 for i in reversed(range(max(1, count - 10), count + 1)):
-                    print("getting msg", i)
+                    print("getting msg", i, "of", size)
                     _, lines, _ = inbox.retr(i)
                     lines = [l.decode("utf8") for l in lines]
+                    #                    for line in lines:
+                    #                        if line.startswith("Subject"):
+                    #                            print(line)
                     if f"Subject: {subject}" in lines:
                         email_id = i
                         body = "\n".join(lines)
                         return body
                 time.sleep(5)
+        except e:
+            print(e)
         finally:
             if email_id:
                 inbox.dele(email_id)
