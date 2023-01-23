@@ -7,15 +7,20 @@ class LayoutAndStylingTest(FunctionalTest):
         # Diego goes to the home page
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
+        actual_width = self.browser.get_window_size()["width"]
 
         inputbox = self.get_item_input_box()
         self.assertAlmostEqual(
-            inputbox.location["x"] + inputbox.size["width"] / 2, 512, delta=10
+            inputbox.location["x"] + inputbox.size["width"] / 2,
+            actual_width / 2,
+            delta=10,
         )
         inputbox.send_keys("testing")
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_table("1: testing")
         inputbox = self.get_item_input_box()
         self.assertAlmostEqual(
-            inputbox.location["x"] + inputbox.size["width"] / 2, 512, delta=10
+            inputbox.location["x"] + inputbox.size["width"] / 2,
+            actual_width / 2,
+            delta=10,
         )
