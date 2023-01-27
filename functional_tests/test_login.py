@@ -79,7 +79,7 @@ class LoginTest(FunctionalTest):
                         body = "\n".join(lines)
                         return body
                 time.sleep(5)
-        except e:
+        except Exception as e:
             print(e)
         finally:
             if email_id:
