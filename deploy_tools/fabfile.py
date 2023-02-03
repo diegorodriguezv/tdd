@@ -37,7 +37,9 @@ def _create_or_update_dotenv():
     append(".env", f"SITENAME={env.host}")
     current_contents = run("cat .env")
     if "DJANGO_SECRET_KEY" not in current_contents:
-        append(".env", f'DJANGO_SECRET_KEY="{get_random_secret_key()}"')
+        # disallow keys with equals character to make parsing easier
+        key = get_random_secret_key().replace("=", "-")
+        append(".env", f'DJANGO_SECRET_KEY="{key}"')
 
 
 def _update_static_files():
