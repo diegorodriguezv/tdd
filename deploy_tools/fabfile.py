@@ -1,5 +1,4 @@
 import random
-from django.core.management.utils import get_random_secret_key
 from fabric.contrib.files import append, exists
 from fabric.api import cd, env, local, run
 
@@ -37,8 +36,9 @@ def _create_or_update_dotenv():
     append(".env", f"SITENAME={env.host}")
     current_contents = run("cat .env")
     if "DJANGO_SECRET_KEY" not in current_contents:
-        # disallow keys with equals character to make parsing easier
-        key = get_random_secret_key().replace("=", "-")
+        key = "".join(
+            random.SystemRandom().choices("abcdefghijklmnopqrstuvwxyz0123456789", k=50)
+        )
         append(".env", f'DJANGO_SECRET_KEY="{key}"')
 
 
